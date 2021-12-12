@@ -19,8 +19,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'full_name',
+        'address',
+        'identify_number',
+        'home_town',
+        'residence',
+        'phone',
         'email',
+        'birthday',
         'password',
+        'note',
+        'card_front',
+        'card_back',
     ];
 
     /**
@@ -41,4 +51,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function toKhai()
+    {{
+        return $this->hasMany(ToKhai::class);
+    }}
 }
