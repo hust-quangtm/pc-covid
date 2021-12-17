@@ -1,11 +1,19 @@
-@extends('layouts.app', ['title' => __('Khai Báo Y Tế')])
+@extends('layouts.app', ['title' => __('Chỉnh Sửa Khai Báo')])
 
 @section('content')
-    @include('users.partials.header', [
-        'title' => __('Xin chào') . ' '. auth()->user()->name,
-        'description' => __('Hãy cùng chung tay đẩy lùi Covid'),
-        'class' => 'col-lg-12'
-    ])
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="background-image: url(../../argon/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+            <div class="row">
+                <div class="col-md-12 {{ $class ?? '' }}">
+                    <h1 class="display-2 text-white">Xin chào {{ auth()->user()->name }}</h1>
+                    <p class="text-white mt-0 mb-5">Hãy cùng chung tay đẩy lùi Covid</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -13,13 +21,13 @@
                 <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
-                            <h3 class="mb-0">{{ __('Khai Báo Y Tế') }}</h3>
+                            <h3 class="mb-0">{{ __('Chỉnh Sửa Khai Báo') }}</h3>
                         </div>
                     </div>
                     <div class="card-body">
                         <form method="post" action="{{ route('update.to-khai', $data->id) }}" autocomplete="off">
                             @csrf
-                            @include('layouts.messages.flash-message');
+                            @include('layouts.messages.flash-message')
                             <div class="pl-lg-4">
                                 <h6 class="heading-small text-muted mb-4">{{ __('Khai báo di chuyển nội địa') }}</h6>
                                 <div class="di-chuyen-noi-dia">
@@ -89,11 +97,9 @@
                                                 <label class="custom-control-label" for="customRadioInline2">Có</label>
                                             </div>
                                         </div>
-                                        @if($data->pass_country == "1")
-                                            <div class="form-group country-note">
-                                                <textarea class="form-control pass_country_note" id="exampleFormControlTextarea1" name="pass_country_note" rows="3">{{ $data->pass_country_note }}</textarea>
-                                            </div>
-                                        @endif
+                                        <div class="form-group country-note" style="{{$data->pass_country == "1"? '' : 'display:none'}}">
+                                            <textarea class="form-control pass_country_note" id="exampleFormControlTextarea1" name="pass_country_note" rows="3">{{ $data->pass_country_note }}</textarea>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="khai-bao-dich-te">
@@ -110,11 +116,9 @@
                                                 <label class="custom-control-label" for="customRadioInline4">Có</label>
                                             </div>
                                         </div>
-                                        @if($data->has_signal == "1" )
-                                            <div class="form-group signal-note">
-                                                <textarea class="form-control signal-note" id="exampleFormControlTextarea2" name="signal_note" rows="3">{{ $data->signal_note}}</textarea>
-                                            </div>
-                                        @endif
+                                        <div class="form-group signal-note" style="{{$data->has_signal == "1"? '' : 'display:none'}}">
+                                            <textarea class="form-control signal-note" id="exampleFormControlTextarea2" name="signal_note" rows="3">{{ $data->signal_note}}</textarea>
+                                        </div>
                                     </div>
                                     <div>
                                         <h6 class="heading-small mb-4 mr-3">{{ __('Trong vòng 14 ngày qua, bạn có tiếp xúc với:') }}</h6>
