@@ -53,7 +53,22 @@ class User extends Authenticatable
     ];
 
     public function toKhai()
-    {{
+    {
         return $this->hasMany(ToKhai::class);
-    }}
+    }
+
+    public function dangKyTiemChung()
+    {
+        return $this->hasMany(DangKyTiemChung::class);
+    }
+
+    public function lichSuTiemChung()
+    {
+        return $this->hasMany(LichSuTiemChung::class);
+    }
+
+    public static function getUserByID($id)
+    {
+        return User::findOrFail($id);
+    }
 }

@@ -39,8 +39,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <a href="">
-                                        <h5 class="card-title text-uppercase text-muted mb-0 text-center">Đăng ký tiêm chủng</h5>
+                                    <a href="{{ route('index.tiem-chung') }}">
+                                        <h5 class="card-title text-uppercase text-muted mb-0 text-center">Thông tin tiêm chủng</h5>
                                     </a>
                                 </div>
                             </div>

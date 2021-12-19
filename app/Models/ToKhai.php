@@ -34,13 +34,11 @@ class ToKhai extends Model
 
     public static function getInfoByUserID($user_id)
     {
-        $data = ToKhai::where('user_id', $user_id) ->orderBy('created_at', 'desc')->get();
-        return $data;
+        return ToKhai::where('user_id', $user_id) ->orderBy('created_at', 'desc')->get();
     }
 
     public static function getInfoByID($id)
     {
-        $data = ToKhai::findOrFail($id);
-        return $data;
+        return ToKhai::findOrFail($id);
     }
 }

@@ -91,12 +91,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('index.khai-bao') }}">
                                     {{ __('Khai báo y tế') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
+                                <a class="nav-link" href="{{ route('index.tiem-chung') }}">
                                     {{ __('Đăng ký tiêm chủng') }}
                                 </a>
                             </li>

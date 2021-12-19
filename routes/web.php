@@ -37,8 +37,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('index.khai-bao');
         Route::get('/create', 'App\Http\Controllers\UserController@khaibao')->name('create.khai-bao');
         Route::post('/store', 'App\Http\Controllers\UserController@storeKhaiBao')->name('store.khai-bao');
-        Route::get('/edit/{id}', 'App\Http\Controllers\UserController@edit')->name('edit.to-khai');
-        Route::post('/update/{id}', 'App\Http\Controllers\UserController@update')->name('update.to-khai');
+        Route::get('/edit/{id}', 'App\Http\Controllers\UserController@editKhaiBao')->name('edit.to-khai');
+        Route::post('/update/{id}', 'App\Http\Controllers\UserController@updateKhaiBao')->name('update.to-khai');
+    });
+
+    Route::group(['prefix' => 'tiem-chung'], function() {
+        Route::get('/', 'App\Http\Controllers\UserController@indexTiemChung')->name('index.tiem-chung');
+        Route::get('/create', 'App\Http\Controllers\UserController@createTiemChung')->name('create.tiem-chung');
+        Route::post('/create', 'App\Http\Controllers\UserController@storeTiemChung')->name('store.tiem-chung');
+        Route::get('/edit/{id}', 'App\Http\Controllers\UserController@editTiemChung')->name('edit.tiem-chung');
+        Route::post('/update/{id}', 'App\Http\Controllers\UserController@updateTiemChung')->name('update.tiem-chung');
     });
 });
 
