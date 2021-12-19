@@ -166,8 +166,8 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="{{ route('edit.tiem-chung', $data->id)}}">Chỉnh sửa</a>
-                                                    <a class="dropdown-item period-delete" data-id="" data-path="">Xóa</a>
+                                                    <a class="dropdown-item" href="{{ route('edit.tiem-chung', $data->id) }}">Chỉnh sửa</a>
+                                                    <a class="dropdown-item period-delete" href="{{ route('delete.tiem-chung', $data->id) }}">Xóa</a>
                                                 </div>
                                             </div>
                                         </td>

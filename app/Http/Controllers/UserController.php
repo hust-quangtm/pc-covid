@@ -96,6 +96,14 @@ class UserController extends Controller
         }
     }
 
+    public function deleteKhaiBao($id)
+    {
+        ToKhai::destroy($id);
+
+        return redirect()->route('index.khai-bao')
+            ->with('info', __('Xóa thành công!'));
+    }
+
     public function indexTiemChung()
     {
         $datas = DangKyTiemChung::getInfoByUserID(Auth::id());
@@ -149,5 +157,13 @@ class UserController extends Controller
         } else {
             return redirect()->back()->withInput();
         }
+    }
+
+    public function deleteTiemChung($id)
+    {
+        DangKyTiemChung::destroy($id);
+
+        return redirect()->route('index.tiem-chung')
+            ->with('info', __('Xóa thành công!'));
     }
 }

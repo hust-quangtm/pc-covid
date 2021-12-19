@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', 'App\Http\Controllers\UserController@storeKhaiBao')->name('store.khai-bao');
         Route::get('/edit/{id}', 'App\Http\Controllers\UserController@editKhaiBao')->name('edit.to-khai');
         Route::post('/update/{id}', 'App\Http\Controllers\UserController@updateKhaiBao')->name('update.to-khai');
+        Route::get('/delete/{id}', 'App\Http\Controllers\UserController@deleteKhaiBao')->name('delete.to-khai');
     });
 
     Route::group(['prefix' => 'tiem-chung'], function() {
@@ -47,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/create', 'App\Http\Controllers\UserController@storeTiemChung')->name('store.tiem-chung');
         Route::get('/edit/{id}', 'App\Http\Controllers\UserController@editTiemChung')->name('edit.tiem-chung');
         Route::post('/update/{id}', 'App\Http\Controllers\UserController@updateTiemChung')->name('update.tiem-chung');
+        Route::get('/delete/{id}', 'App\Http\Controllers\UserController@deleteTiemChung')->name('delete.tiem-chung');
     });
 });
 

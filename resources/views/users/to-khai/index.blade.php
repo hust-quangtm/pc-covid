@@ -75,7 +75,7 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     <a class="dropdown-item" href="{{ route('edit.to-khai', $data->id)}}">Chỉnh sửa</a>
-                                                    <a class="dropdown-item period-delete" data-id="" data-path="">Xóa</a>
+                                                    <a class="dropdown-item period-delete" href="{{ route('delete.to-khai', $data->id) }}">Xóa</a>
                                                 </div>
                                             </div>
                                         </td>
