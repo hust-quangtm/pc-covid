@@ -21,7 +21,7 @@
                             @csrf
                             @method('put')
 
-                            <h6 class="heading-small text-muted mb-4">{{ __('User information') }}</h6>
+                            <h6 class="heading-small text-muted mb-4">{{ __('Thông Tin Cá Nhân') }}</h6>
 
                             @if (session('status'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -64,15 +64,52 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
+                                <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }} mb-0">
                                     <label class="form-control-label" for="input-address">{{ __('Địa Chỉ Hiện Tại') }}</label>
-                                    <input type="text" name="address" id="input-address" class="form-control form-control-alternative{{ $errors->has('address') ? ' is-invalid' : '' }}" placeholder="{{ __('Nơi ở hiện tại') }}" value="{{ old('address', auth()->user()->address) }}" required>
-
-                                    @if ($errors->has('address'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('address') }}</strong>
-                                        </span>
-                                    @endif
+                                    <div class="col-12 d-flex flex-row">
+                                        <div class="form-group col-3">
+                                            <label for="city">Tỉnh / Thành</label>
+                                            <select class="form-control js_location" id="city" data-type="city" name="province" required>
+                                              <option value="">Chọn Tỉnh-Thành</option>
+                                                @foreach($citys as $key => $city)
+                                                    <?php $is_check = true;?>
+                                                    @if(auth()->user()->province == $city->id)
+                                                        <?php $is_check = false;?>
+                                                        <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
+                                                    @endif
+                                                    @if($is_check)
+                                                        <option value="{{ $city->id }}">{{ $city->name}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-3">
+                                            <label for="district">Quận / Huyện</label>
+                                            <select class="form-control js_location" data-type="district" id="district" name="district" required>
+                                                <option>Chọn Quận-Huyện</option>
+                                                @foreach($districts as $key => $district)
+                                                    @if(auth()->user()->district == $district->id)
+                                                        <option value="{{ $district->id }}" selected>{{ $district->name }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-3">
+                                            <label for="wards">Xã / Phường</label>
+                                            <select class="form-control" id="wards" name="ward" required>
+                                                <option>Chọn Xã-Phường</option>
+                                                @foreach($wards as $key => $ward)
+                                                    @if(auth()->user()->ward == $ward->id)
+                                                        <option value="{{ $ward->id }}" selected>{{ $ward->name }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-3">
+                                            <label for="exampleFormControlSelect1">Địa Chỉ</label>
+                                            <input type="text" name="address" id="input-address" class="form-control form-control-alternative{{ $errors->has('address') ? ' is-invalid' : '' }}" placeholder="{{ __('Thôn - Xóm, Đường, Số Nhà...') }}" value="{{ old('address', auth()->user()->address) }}" required>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group{{ $errors->has('identify_number') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-identify">{{ __('Số CMND/CCCD') }}</label>
@@ -147,4 +184,49 @@
 
         @include('layouts.footers.auth')
     </div>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({
+                header: {
+                    'X-CSRF-TOKEN': $('mete[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.js_location').change(function (event) {
+                event.preventDefault();
+                let route = '{{ route('ajax_get.location')}}';
+                let $this = $(this);
+                let type = $this.attr('data-type');
+                let parrentID = $this.val();
+
+                $.ajax({
+                    method: "GET",
+                    url: route,
+                    data: {type: type, parent: parrentID}
+                })
+
+                .done(function (msg) {
+                    if(msg.data) {
+                        let html = '';
+                        let element = '';
+                        if (type == 'city') {
+                            html = "<option>_Chọn Quận Huyện_</option>";
+                            element = '#district';
+                        } else {
+                            html = "<option>_Chọn Phường Xã_</option>";
+                            element = '#wards';
+                        }
+
+                        $.each(msg.data, function (index, value) {
+                            html += "<option value='"+value.id+"'>"+value.name+"</option>"
+                        });
+
+                        $(element).html('').append(html);
+                    }
+                })
+            })
+        })
+    </script>
 @endsection

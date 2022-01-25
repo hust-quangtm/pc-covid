@@ -174,10 +174,15 @@
         @include('layouts.footers.auth')
     </div>
 @endsection
-@push('js')
+{{-- @push('js')
     <script type="text/javascript">
         passCountry();
         hasSignal();
     </script>
-@endpush
-
+@endpush --}}
+@section('script')
+    <script type="text/javascript">
+        passCountry();
+        hasSignal();
+    </script>
+@endsection

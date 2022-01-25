@@ -32,6 +32,9 @@ class User extends Authenticatable
         'note',
         'card_front',
         'card_back',
+        'province',
+        'district',
+        'ward'
     ];
 
     /**

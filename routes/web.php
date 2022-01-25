@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('icons', function () {return view('pages.icons');})->name('icons');
 	Route::get('table-list', function () {return view('pages.tables');})->name('table');
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+    Route::get('getLocation', 'App\Http\Controllers\ProfileController@getLocation')->name('ajax_get.location');
 
     Route::group(['prefix' => 'khao-bao-y-te'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('index.khai-bao');
@@ -52,5 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-Route::group(['middleware' => ['auth', 'role:admin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|ward|district|province']], function () {
+    Route::get('/', 'App\Http\Controllers\AdminController@index')->name('admin.index');
+    Route::get('/user', 'App\Http\Controllers\AdminController@indexUser')->name('admin.index.user');
+    Route::get('/delete/{id}', 'App\Http\Controllers\AdminController@deleteUser')->name('admin.delete.user');
 });

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -15,7 +17,21 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile.edit');
+        $citys = DB::table('locations')->where('type', 1)->get();
+        $districts = DB::table('locations')->where('type', 2)->get();
+        $wards = DB::table('locations')->where('type', 3)->get();
+
+        return view('profile.edit', compact('citys', 'districts', 'wards'));
+    }
+
+    public function getLocation(Request $request)
+    {
+        $parrentID = $request->parent;
+        if($parrentID) {
+            $locations = DB::table('locations')->where('parent_id', $parrentID)->get();
+
+            return response(['data' => $locations]);
+        }
     }
 
     /**

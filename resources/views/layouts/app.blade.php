@@ -44,7 +44,8 @@
 
         @stack('js')
         <script src="{{ asset('assets/js/main.js') }}"></script>
-        @stack('js_okr')
+
+        @yield('script')
 
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
