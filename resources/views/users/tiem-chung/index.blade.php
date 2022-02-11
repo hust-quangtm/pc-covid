@@ -141,14 +141,14 @@
                                         <th scope="row">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <span class="name mb-0 text-sm" data-date-format="yyyy-mm-dd">{{ $data->date_of_injection ? date_format(new DateTime($data->date_of_injection), 'Y-m-d') : '' }}</span>
+                                                    <span class="name mb-0 text-sm text-danger" data-date-format="yyyy-mm-dd">{{ $data->date_of_injection ? date_format(new DateTime($data->date_of_injection), 'Y-m-d') : '' }}</span>
                                                 </div>
                                             </div>
                                         </th>
                                         <th scope="row">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <span class="name mb-0 text-sm">{{ $data->injection_address }}</span>
+                                                    <span class="name mb-0 text-sm text-danger">{{ $data->injection_address }}</span>
                                                 </div>
                                             </div>
                                         </th>

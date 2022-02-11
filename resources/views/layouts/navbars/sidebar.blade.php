@@ -103,7 +103,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('index.tiem-chung') }}">
+                                    <a class="nav-link" href="{{ route('admin.tiemchung.index') }}">
                                         {{ __('Quản Lý Tiêm Chủng') }}
                                     </a>
                                 </li>

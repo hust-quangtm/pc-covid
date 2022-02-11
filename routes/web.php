@@ -57,4 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|ward|dis
     Route::get('/', 'App\Http\Controllers\AdminController@index')->name('admin.index');
     Route::get('/user', 'App\Http\Controllers\AdminController@indexUser')->name('admin.index.user');
     Route::get('/delete/{id}', 'App\Http\Controllers\AdminController@deleteUser')->name('admin.delete.user');
+    Route::get('/tiem-chung', 'App\Http\Controllers\Admin\InjectionController@index')->name('admin.tiemchung.index');
+    Route::get('/tiem-chung/edit/{id}', 'App\Http\Controllers\Admin\InjectionController@edit')->name('admin.tiemchung.edit');
+    Route::post('/tiem-chung/update/{id}', 'App\Http\Controllers\Admin\InjectionController@update')->name('admin.tiemchung.update');
 });
