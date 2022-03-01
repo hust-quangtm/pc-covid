@@ -34,7 +34,8 @@ class User extends Authenticatable
         'card_back',
         'province',
         'district',
-        'ward'
+        'ward',
+        'device_token'
     ];
 
     /**

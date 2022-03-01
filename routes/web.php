@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('table-list', function () {return view('pages.tables');})->name('table');
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
     Route::get('getLocation', 'App\Http\Controllers\ProfileController@getLocation')->name('ajax_get.location');
+    Route::post('/store-token', 'App\Http\Controllers\WebNotificationController@storeToken')->name('store.token');
 
     Route::group(['prefix' => 'khao-bao-y-te'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('index.khai-bao');
@@ -60,4 +61,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|ward|dis
     Route::get('/tiem-chung', 'App\Http\Controllers\Admin\InjectionController@index')->name('admin.tiemchung.index');
     Route::get('/tiem-chung/edit/{id}', 'App\Http\Controllers\Admin\InjectionController@edit')->name('admin.tiemchung.edit');
     Route::post('/tiem-chung/update/{id}', 'App\Http\Controllers\Admin\InjectionController@update')->name('admin.tiemchung.update');
+    Route::get('/push-notificaiton', 'App\Http\Controllers\WebNotificationController@index')->name('push-notification');
+    Route::post('/send-web-notification', 'App\Http\Controllers\WebNotificationController@sendWebNotification')->name('send.web-notification');
 });
