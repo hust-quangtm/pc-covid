@@ -52,6 +52,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/update/{id}', 'App\Http\Controllers\UserController@updateTiemChung')->name('update.tiem-chung');
         Route::get('/delete/{id}', 'App\Http\Controllers\UserController@deleteTiemChung')->name('delete.tiem-chung');
     });
+
+    Route::group(['prefix' => 'health-track'], function() {
+        Route::get('/', 'App\Http\Controllers\HealthTrackController@index')->name('health-track.index');
+        Route::get('/create', 'App\Http\Controllers\HealthTrackController@create')->name('health-track.create');
+        Route::post('/create', 'App\Http\Controllers\HealthTrackController@store')->name('health-track.store');
+        Route::get('/edit/{id}', 'App\Http\Controllers\HealthTrackController@edit')->name('health-track.edit');
+        Route::post('/update/{id}', 'App\Http\Controllers\HealthTrackController@update')->name('health-track.update');
+        Route::get('/delete/{id}', 'App\Http\Controllers\HealthTrackController@destroy')->name('health-track.delete');
+    });
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|ward|district|province']], function () {

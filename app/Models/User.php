@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->hasMany(LichSuTiemChung::class);
     }
 
+    public function  healthTrack()
+    {
+        return $this->hasMany(HealthTrack::class);
+    }
+
     public static function getUserByID($id)
     {
         return User::findOrFail($id);

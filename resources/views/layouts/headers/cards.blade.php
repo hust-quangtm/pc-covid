@@ -52,8 +52,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <a href="">
-                                        <h5 class="card-title text-uppercase text-muted mb-0 text-center">Lịch sử đi lại</h5>
+                                    <a href="{{ route('health-track.index') }}">
+                                        <h5 class="card-title text-uppercase text-muted mb-0 text-center">Theo Dõi Sức Khỏe</h5>
                                     </a>
                                 </div>
                             </div>

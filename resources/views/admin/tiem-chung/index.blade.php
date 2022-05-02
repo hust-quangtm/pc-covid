@@ -11,30 +11,6 @@
         <div class="row">
             <div class="col-xl-12 order-xl-1">
                 @include('layouts.messages.flash-message');
-                {{-- <div class="card bg-secondary shadow lich-su-tiem">
-                    <div class="card-header col-12 bg-white border-0 d-flex flex-row">
-                        <div class="row align-items-center col-8">
-                            <h3 class="mb-0">{{ __('Lịch Sử Tiêm Chủng') }}</h3>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive pb-4" >
-                            <table class="table align-items-center table-flush">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th scope="col" class="sort" data-sort="ID">ID</th>
-                                    <th scope="col" class="sort" data-sort="title">Họ Tên</th>
-                                    <th scope="col" class="sort" data-sort="description">Loại Vacxin</th>
-                                    <th scope="col" class="sort" data-sort="description">Mũi Thứ</th>
-                                    <th scope="col" class="sort" data-sort="started_at">Ngày Tiêm</th>
-                                    <th scope="col"></th>
-                                </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div> --}}
-
                 <div class="card bg-secondary shadow dang-ky-tiem mt-5">
                     <div class="card-header col-12 bg-white border-0 d-flex flex-row">
                         <div class="row align-items-center col-8">

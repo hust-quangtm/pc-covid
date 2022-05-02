@@ -120,8 +120,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        {{ __('Lịch sử di chuyển') }}
+                                    <a class="nav-link" href="{{ route('health-track.index') }}">
+                                        {{ __('Theo Dõi Sức Khỏe') }}
                                     </a>
                                 </li>
                             </ul>
