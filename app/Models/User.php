@@ -77,6 +77,10 @@ class User extends Authenticatable
         return $this->hasMany(HealthTrack::class);
     }
 
+    public function patienInformation () {
+        return $this->hasMany(PatientInformation::class);
+    }
+
     public static function getUserByID($id)
     {
         return User::findOrFail($id);

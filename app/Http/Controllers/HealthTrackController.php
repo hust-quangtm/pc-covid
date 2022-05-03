@@ -91,7 +91,6 @@ class HealthTrackController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

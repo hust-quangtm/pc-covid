@@ -12,14 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
-
-// Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'App\Http\Controllers\HomeController@index');
@@ -60,6 +53,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/edit/{id}', 'App\Http\Controllers\HealthTrackController@edit')->name('health-track.edit');
         Route::post('/update/{id}', 'App\Http\Controllers\HealthTrackController@update')->name('health-track.update');
         Route::get('/delete/{id}', 'App\Http\Controllers\HealthTrackController@destroy')->name('health-track.delete');
+    });
+
+    Route::group(['prefix' => 'check-patient'], function() {
+        Route::get('/', 'App\Http\Controllers\PatientInformationController@index')->name('check-patient.index');
+        Route::get('/show/{id}', 'App\Http\Controllers\PatientInformationController@show')->name('check-patient.show');
+        Route::get('/create', 'App\Http\Controllers\PatientInformationController@create')->name('check-patient.create');
+        Route::post('/create', 'App\Http\Controllers\PatientInformationController@store')->name('check-patient.store');
+        Route::get('/edit/{id}', 'App\Http\Controllers\PatientInformationController@edit')->name('check-patient.edit');
+        Route::post('/update/{id}', 'App\Http\Controllers\PatientInformationController@update')->name('check-patient.update');
+        Route::get('/delete/{id}', 'App\Http\Controllers\PatientInformationController@destroy')->name('check-patient.delete');
     });
 });
 
