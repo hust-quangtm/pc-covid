@@ -20,7 +20,6 @@
                     <div class="card-body">
                         <form method="post" action="{{ route('health-track.update', $data->id) }}" autocomplete="off">
                             @csrf
-
                             @if (session('status'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     {{ session('status') }}
@@ -32,6 +31,20 @@
 
                             <div class="pl-lg-4">
                                 <h6 class="heading-small text-muted mb-4">{{ __('Thông Tin Khai Báo Sức Khỏe') }}</h6>
+                                <div class="d-flex flex-column">
+                                    <div class="form-group">
+                                        <label class="form-control-label">{{ __('Họ Tên') }}</label>
+                                        <input type="text" class="form-control" value="{{ $data->user->full_name }}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">{{ __('CCCD/CMND') }}</label>
+                                        <input type="text" class="form-control" value="{{ $data->user->identify_number }}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">{{ __('Địa Chỉ') }}</label>
+                                        <input type="text" class="form-control" value="{{ $data->user->address }}" readonly>
+                                    </div>
+                                </div>
                                 <div class="edit-information">
                                     <div class="col-12 d-flex flex-row px-0">
                                         <div class="col-8 pl-0">
@@ -224,6 +237,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
+                                    <a href="{{route('admin.health-track.detail', $data->user->id)}}" class="btn btn-primary mt-4">Trở Lại</a>
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Cập Nhật') }}</button>
                                 </div>
                             </div>

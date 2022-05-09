@@ -42,13 +42,18 @@ class HealthTrack extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function getInforByUserId ()
+    public static function getInforByUserId ($id)
     {
-        return HealthTrack::with('user')->get();
+        return HealthTrack::with('user')->where('user_id', $id)->get();
     }
 
     public static function getInforById ($id)
     {
-        return HealthTrack::findOrFail($id);
+        return HealthTrack::with('user')->findOrFail($id);
+    }
+
+    public static function getAll()
+    {
+        return HealthTrack::with('user')->orderBy('created_at', "DESC")->get();
     }
 }

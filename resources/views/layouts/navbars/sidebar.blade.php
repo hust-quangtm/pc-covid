@@ -96,6 +96,11 @@
                                         {{ __('Yêu Cầu Xác Nhận F0') }}
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.health-track.index') }}">
+                                        {{ __('Theo Dõi Sức Khỏe') }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>

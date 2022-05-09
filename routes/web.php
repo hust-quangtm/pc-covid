@@ -83,4 +83,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|ward|dis
         Route::post('/update/{id}', 'App\Http\Controllers\Admin\PatientInformationController@update')->name('admin.check-patient.update');
         Route::get('/delete/{id}', 'App\Http\Controllers\Admin\PatientInformationController@destroy')->name('admin.check-patient.delete');
     });
+
+    Route::group(['prefix' => 'health-track'], function () {
+        Route::get('/', 'App\Http\Controllers\Admin\HealthTrackController@index')->name('admin.health-track.index');
+        Route::get('/{user_id}/detail', 'App\Http\Controllers\Admin\HealthTrackController@detail')->name('admin.health-track.detail');
+        Route::get('/show/{id}', 'App\Http\Controllers\Admin\HealthTrackController@show')->name('admin.health-track.show');
+        Route::get('/edit/{id}', 'App\Http\Controllers\Admin\HealthTrackController@edit')->name('admin.health-track.edit');
+        Route::post('/update/{id}', 'App\Http\Controllers\Admin\HealthTrackController@update')->name('admin.health-track.update');
+        Route::get('/delete/{id}', 'App\Http\Controllers\Admin\HealthTrackController@destroy')->name('admin.health-track.delete');
+    });
 });
