@@ -20,6 +20,20 @@
                     <div class="card-body">
                         <div class="pl-lg-4">
                             <h6 class="heading-small text-muted mb-4">{{ __('Thông Tin Khai Báo') }}</h6>
+                            <div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-note">{{ __('Họ Tên:') }}</label>
+                                    <input type="text" class="form-control" name="note" value="{{ $data->user->full_name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-note">{{ __('CMND/CCCD:') }}</label>
+                                    <input type="text" class="form-control" name="note" value="{{ $data->user->identify_number }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-note">{{ __('Nơi Ở Hiện Tại:') }}</label>
+                                    <input type="text" class="form-control" name="note" value="{{ $data->user->address }}">
+                                </div>
+                            </div>
                             <div class="edit-information">
                                 <div class="col-12 pl-0">
                                     <div class="form-group{{ $errors->has('declaration_date') ? ' has-danger' : '' }}">
@@ -48,7 +62,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-note">{{ __('Ghi chú:') }}</label>
-                                    <input type="text" class="form-control" name="note" placeholder="Ghi chú khác của người bệnh" value="{{ $data->note }}">
+                                    <input type="text" class="form-control" name="note" placeholder="Ghi chú khác của người bệnh" value="{{ $data->note}}">
                                 </div>
                             </div>
                             <div class="card bg-secondary shadow mt-5">
@@ -94,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <a class="btn btn-info mt-4" href="{{ route('check-patient.index') }}">{{ __('Trở Lại') }}</a>
+                                <a class="btn btn-info mt-4" href="{{ route('admin.check-patient.index') }}">{{ __('Trở Lại') }}</a>
                             </div>
                         </div>
                     </div>

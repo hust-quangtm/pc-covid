@@ -75,4 +75,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|ward|dis
     Route::post('/tiem-chung/update/{id}', 'App\Http\Controllers\Admin\InjectionController@update')->name('admin.tiemchung.update');
     Route::get('/push-notificaiton', 'App\Http\Controllers\WebNotificationController@index')->name('push-notification');
     Route::post('/send-web-notification', 'App\Http\Controllers\WebNotificationController@sendWebNotification')->name('send.web-notification');
+
+    Route::group(['prefix' => 'check-patient'], function () {
+        Route::get('/', 'App\Http\Controllers\Admin\PatientInformationController@index')->name('admin.check-patient.index');
+        Route::get('/show/{id}', 'App\Http\Controllers\Admin\PatientInformationController@show')->name('admin.check-patient.show');
+        Route::get('/edit/{id}', 'App\Http\Controllers\Admin\PatientInformationController@edit')->name('admin.check-patient.edit');
+        Route::post('/update/{id}', 'App\Http\Controllers\Admin\PatientInformationController@update')->name('admin.check-patient.update');
+        Route::get('/delete/{id}', 'App\Http\Controllers\Admin\PatientInformationController@destroy')->name('admin.check-patient.delete');
+    });
 });

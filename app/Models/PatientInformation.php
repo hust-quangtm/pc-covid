@@ -28,10 +28,14 @@ class PatientInformation extends Model
 
     public static function getInforById ($id)
     {
-        return PatientInformation::findOrFail($id);
+        return PatientInformation::with('user')->findOrFail($id);
     }
 
     public static function getInforByUserId ($user_id) {
         return PatientInformation::with('user')->where('user_id', $user_id)->orderBy('declaration_date', 'DESC')->get();
+    }
+
+    public static function getAllUser () {
+        return PatientInformation::with('user')->orderBy('declaration_date', 'DESC')->get();
     }
 }

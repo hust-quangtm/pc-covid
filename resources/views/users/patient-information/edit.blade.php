@@ -67,51 +67,56 @@
                                         <h5 class="text-danger ml-3"><strong>・ Bằng việc nhấn nút "Lưu", bạn hoàn toàn hiểu và đồng ý chịu trách nhiệm với các thông tin đã cung cấp.</strong></h5>
                                     </div>
                                 </div>
-
-                                <div class="card bg-secondary shadow mt-5">
-                                    <div class="card-header bg-white border-0">
-                                        <div class="row align-items-center">
-                                            <h3 class="mb-0">{{ __('Xác Nhận Của Nhân Viên Y Tế') }}</h3>
+                                @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('ward') || auth()->user()->hasRole('district') || auth()->user()->hasRole('province'))
+                                    <div class="card bg-secondary shadow mt-5">
+                                        <div class="card-header bg-white border-0">
+                                            <div class="row align-items-center">
+                                                <h3 class="mb-0">{{ __('Xác Nhận Của Nhân Viên Y Tế') }}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col-12 pl-0">
+                                                <div class="form-group{{ $errors->has('confirm_status') ? ' has-danger' : '' }}">
+                                                    <label class="form-control-label" for="input-confirm_status">{{ __('Xác Nhận Của Nhân Viên Y Tế') }}</label>
+                                                    <select class="form-control" id="confirm_status" name="confirm_status">
+                                                        <option value="not_checked">Chọn Trạng Thái</option>
+                                                        <option value="infected" {{$data->confirm_status == 'infected' ? 'selected' : ''}}>Dương Tính Covid 19</option>
+                                                        <option value="not_infected" {{$data->confirm_status == 'not_infected' ? 'selected' : ''}}>Âm Tính Với Covid 19</option>
+                                                        <option value="cannot_proof" {{$data->confirm_status == 'cannot_proof' ? 'selected' : ''}}>Chưa Đủ Điều Kiện Để Xác Minh</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 pl-0">
+                                                <div class="form-group{{ $errors->has('infected_day') ? ' has-danger' : '' }}">
+                                                    <label class="form-control-label" for="input-infected_day">{{ __('Ngày Nhiễm Bệnh') }}</label>
+                                                    <input type="text" name="infected_day" data-date-format="yyyy-mm-dd" value="{{ $data->infected_day ? date_format(new DateTime($data->infected_day), 'Y-m-d') : ''}}" class="form-control datepicker">
+                                                    @if ($errors->has('infected_day'))
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $errors->first('infected_day') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-12 pl-0">
+                                                <div class="form-group{{ $errors->has('recovery_day') ? ' has-danger' : '' }}">
+                                                    <label class="form-control-label" for="input-recovery_day">{{ __('Ngày Khỏi Bệnh') }}</label>
+                                                    <input type="text" name="recovery_day" data-date-format="yyyy-mm-dd" value="{{ $data->recovery_day ? date_format(new DateTime($data->recovery_day), 'Y-m-d') : ''}}" class="form-control datepicker">
+                                                    @if ($errors->has('recovery_day'))
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $errors->first('recovery_day') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="col-12 pl-0">
-                                            <div class="form-group{{ $errors->has('confirm_status') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-confirm_status">{{ __('Xác Nhận Của Nhân Viên Y Tế') }}</label>
-                                                <select class="form-control" id="confirm_status" name="confirm_status">
-                                                    <option value="not_checked">Chọn Trạng Thái</option>
-                                                    <option value="infected" {{$data->confirm_status == 'infected' ? 'selected' : ''}}>Dương Tính Covid 19</option>
-                                                    <option value="not_infected" {{$data->confirm_status == 'not_infected' ? 'selected' : ''}}>Âm Tính Với Covid 19</option>
-                                                    <option value="cannot_proof" {{$data->confirm_status == 'cannot_proof' ? 'selected' : ''}}>Chưa Đủ Điều Kiện Để Xác Minh</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 pl-0">
-                                            <div class="form-group{{ $errors->has('infected_day') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-infected_day">{{ __('Ngày Nhiễm Bệnh') }}</label>
-                                                <input type="text" name="infected_day" data-date-format="yyyy-mm-dd" value="{{ $data->infected_day ? date_format(new DateTime($data->infected_day), 'Y-m-d') : ''}}" class="form-control datepicker">
-                                                @if ($errors->has('infected_day'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('infected_day') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-12 pl-0">
-                                            <div class="form-group{{ $errors->has('recovery_day') ? ' has-danger' : '' }}">
-                                                <label class="form-control-label" for="input-recovery_day">{{ __('Ngày Khỏi Bệnh') }}</label>
-                                                <input type="text" name="recovery_day" data-date-format="yyyy-mm-dd" value="{{ $data->recovery_day ? date_format(new DateTime($data->recovery_day), 'Y-m-d') : ''}}" class="form-control datepicker">
-                                                @if ($errors->has('recovery_day'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('recovery_day') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endif
                                 <div class="text-center">
-                                    <a class="btn btn-info mt-4" href="{{ route('check-patient.index') }}">{{ __('Trở Lại') }}</a>
+                                    @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('ward') || auth()->user()->hasRole('district') || auth()->user()->hasRole('province'))
+                                        <a class="btn btn-info mt-4" href="{{ route('admin.check-patient.index') }}">{{ __('Trở Lại') }}</a>
+                                    @else
+                                        <a class="btn btn-info mt-4" href="{{ route('check-patient.index') }}">{{ __('Trở Lại') }}</a>
+                                    @endif
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Cập Nhật') }}</button>
                                 </div>
                             </div>

@@ -67,7 +67,7 @@
                         </a>
                     @endif
                 </li>
-                @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('ward') || auth()->user()->hasRole('district') || auth()->user()->hasRole('province') )
+                @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('ward') || auth()->user()->hasRole('district') || auth()->user()->hasRole('province'))
                     <li class="nav-item">
                         <a class="nav-link active" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                             <i class="fas fa-users-cog" style="color: #5fcaf4;"></i>
@@ -83,12 +83,17 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('index.khai-bao') }}">
-                                        {{ __('Quảng Lý Di Chuyển') }}
+                                        {{ __('Quản Lý Di Chuyển') }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.tiemchung.index') }}">
                                         {{ __('Quản Lý Tiêm Chủng') }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.check-patient.index') }}">
+                                        {{ __('Yêu Cầu Xác Nhận F0') }}
                                     </a>
                                 </li>
                             </ul>
@@ -120,10 +125,17 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('health-track.index') }}">
-                                        {{ __('Theo Dõi Sức Khỏe') }}
+                                    <a class="nav-link" href="{{ route('check-patient.index') }}">
+                                        {{ __('Yêu Cầu Xác Nhận F0') }}
                                     </a>
                                 </li>
+                                @if(auth()->user()->getCheckPatientInforByUserID(auth()->user()->id)[0]->confirm_status == "infected")
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('health-track.index') }}">
+                                            {{ __('Theo Dõi Sức Khỏe') }}
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </li>

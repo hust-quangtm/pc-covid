@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\PatientInformation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PatientInformationController extends Controller
 {
@@ -15,9 +15,9 @@ class PatientInformationController extends Controller
      */
     public function index()
     {
-        $datas = PatientInformation::getInforByUserId(Auth()->id());
+        $datas = PatientInformation::getAllUser();
 
-        return view('users.patient-information.index', compact('datas'));
+        return view('users.patient-information.admin.index', compact('datas'));
     }
 
     /**
@@ -28,7 +28,6 @@ class PatientInformationController extends Controller
     public function create()
     {
         //
-        return view('users.patient-information.create');
     }
 
     /**
@@ -40,28 +39,6 @@ class PatientInformationController extends Controller
     public function store(Request $request)
     {
         //
-        request()->validate([
-            'proof_of_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-        $data = new PatientInformation();
-        $data['user_id'] = Auth()->id();
-        $data['declaration_date'] = $request->declaration_date;
-
-        if ($request->file('proof_of_image')) {
-            $file= $request->file('proof_of_image');
-            $filename= "image/f0-proof/".date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('image/f0-proof/'), $filename);
-            $data['proof_of_image']= $filename;
-        }
-
-        $data->save();
-
-        if ($data->save()) {
-            return redirect()->route('check-patient.index')->with('success', __('Khai báo thành công!'));
-        } else {
-            return redirect()->back()->withInput()->with('error', __('Khai báo không thành công!'));
-        }
     }
 
     /**
@@ -74,7 +51,7 @@ class PatientInformationController extends Controller
     {
         $data = PatientInformation::getInforById($id);
 
-        return view('users.patient-information.show', compact('data'));
+        return view('users.patient-information.admin.show', compact('data'));
     }
 
     /**
@@ -85,10 +62,7 @@ class PatientInformationController extends Controller
      */
     public function edit($id)
     {
-        //
-        $data = PatientInformation::getInforById($id);
-
-        return view('users.patient-information.edit', compact('data'));
+        return redirect()->route('check-patient.edit', $id);
     }
 
     /**
@@ -117,7 +91,7 @@ class PatientInformationController extends Controller
         $data->save();
 
         if ($data->save()) {
-            return redirect()->route('check-patient.edit', $id)->with('success', __('Cập Nhật Thành Công'));
+            return redirect()->route('admin.check-patient.edit', $id)->with('success', __('Cập Nhật Thành Công'));
         } else {
             return redirect()->back()->withInput()->with('error', __('Cập Nhật Thất Bại'));
         }
@@ -135,10 +109,10 @@ class PatientInformationController extends Controller
 
         if ($data) {
             PatientInformation::destroy($id);
-            return redirect()->route('check-patient.index')
+            return redirect()->route('admin.check-patient.index')
                 ->with('info', __('Xóa thành công!'));
         } else {
-            return redirect()->route('check-patient.index')
+            return redirect()->route('admin.check-patient.index')
                 ->with('error', __('Không thể xóa bản ghi!'));
         }
     }

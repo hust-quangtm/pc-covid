@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return User::findOrFail($id);
     }
+
+    public static function getCheckPatientInforByUserID($id)
+    {
+        return PatientInformation::with('user')->where('user_id', $id)->orderBy('created_at', 'DESC')->get();
+    }
 }
