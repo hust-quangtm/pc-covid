@@ -171,13 +171,15 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         // Argon
         LaravelFrontendPresets\ArgonPreset\ArgonPresetServiceProvider::class,
         //Entrust
         Shanmuga\LaravelEntrust\LaravelEntrustServiceProvider::class,
+        //FCM
+        LaravelFCM\FCMServiceProvider::class,
 
     ],
 
@@ -235,7 +237,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //Entrust
         'LaravelEntrust'   => Shanmuga\LaravelEntrust\Facades\LaravelEntrustFacade::class,
-
+        //FCM
+        'FCM'      => LaravelFCM\Facades\FCM::class,
     ],
 
 ];

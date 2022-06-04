@@ -45,8 +45,7 @@
             </div>
         </div>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script>
         var firebaseConfig = {
             apiKey: "AIzaSyD4n1dS7zBbr8Gyjibfe1jFVKIZBsgKkeQ",
@@ -64,12 +63,38 @@
             measurementId: "G-578BHJEPRH"
         };
         firebase.initializeApp(firebaseConfig);
-        const messaging = firebase.messaging();
+        const message = firebase.messaging();
+        // message.onTokenRefresh(() => {
+        //     message.getToken().then((currentToken) => {
+        //         if (currentToken) {
+        //             console.log(currentToken);
+        //             $.ajaxSetup({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //                 }
+        //             });
+        //             $.ajax({
+        //                 url: '{{ route("store.token") }}',
+        //                 type: 'POST',
+        //                 data: {
+        //                     token: currentToken
+        //                 },
+        //                 dataType: 'JSON',
+        //                 success: function (response) {
+        //                     alert('Thanks for subcribe!.');
+        //                 },
+        //                 error: function (err) {
+        //                     console.log('User Chat Token Error'+ err);
+        //                 },
+        //             });
+        //         }
+        //     })
+        // })
+
         function initFirebaseMessagingRegistration() {
-                messaging
-                .requestPermission()
+                Notification.requestPermission()
                 .then(function () {
-                    return messaging.getToken()
+                    return message.getToken({vapidKey: "BLkhLy4TLxhwyDsBet4e8mjvLJ0rj5USCQ_ra2NqKgdOrdlsyfWG-oOGkARKP46Es90o6OaS0qZuLd_PBbNyQg0"})
                 })
                 .then(function(token) {
                     console.log(token);
@@ -96,7 +121,9 @@
                     console.log('User Chat Token Error'+ err);
                 });
          }
+
         messaging.onMessage(function(payload) {
+            console.log(payload)
             const noteTitle = payload.notification.title;
             const noteOptions = {
                 body: payload.notification.body,
@@ -104,5 +131,5 @@
             };
             new Notification(noteTitle, noteOptions);
         });
-    </script>
+    </script> --}}
 @endsection

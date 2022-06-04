@@ -40,8 +40,9 @@
     </div>
 </nav>
 
-<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="//www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="//www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
     var firebaseConfig = {
         apiKey: "AIzaSyD4n1dS7zBbr8Gyjibfe1jFVKIZBsgKkeQ",
@@ -59,6 +60,7 @@
         measurementId: "G-578BHJEPRH"
     };
     firebase.initializeApp(firebaseConfig);
+    console.log(firebase);
     const messaging = firebase.messaging();
     function initFirebaseMessagingRegistration() {
             messaging

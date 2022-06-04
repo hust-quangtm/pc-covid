@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\MessageSent;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,16 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'App\Http\Controllers\HomeController@index');
+    // Route::get('/chat', function () {
+    //     return view('chat');
+    // });
+    // Route::post('/message', function (Request $request) {
+    //     broadcast(new MessageSent(auth()->user(), $request->input('message')));
+    //     return $request->input('message');
+    // });
+    Route::get('/chat', 'App\Http\Controllers\UserController@indexChat');
+    Route::post('/chat', 'App\Http\Controllers\UserController@createChat');
+
     Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	Route::get('profile', 'App\Http\Controllers\ProfileController@edit')->name('profile.edit');
@@ -92,4 +104,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|ward|dis
         Route::post('/update/{id}', 'App\Http\Controllers\Admin\HealthTrackController@update')->name('admin.health-track.update');
         Route::get('/delete/{id}', 'App\Http\Controllers\Admin\HealthTrackController@destroy')->name('admin.health-track.delete');
     });
+});
+
+Route::get('test', function() {
+    $ch = curl_init();
+    $url = 'https://google.com';
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_POST,true);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    $error = curl_error($ch);
+    $result = curl_exec($ch);
+
+    var_dump($result);
 });

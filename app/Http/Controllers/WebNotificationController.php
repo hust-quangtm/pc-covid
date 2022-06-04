@@ -26,7 +26,7 @@ class WebNotificationController extends Controller
     {
         $firebaseToken = User::whereNotNull('device_token')->pluck('device_token')->all();
 
-        $SERVER_API_KEY = 'AAAAu7w7RtE:APA91bFzyoKFungYXjAvM46ag-v-jVOfYDs-qsESAuUObBaLb5p769SuejGBX1zLbKlqglBc4ldFk--fDLDEtsu9Er0uWwbPPMEbmiJVEtrHa6VxfXvsW2CKTzEnXC8F3RllsNYyZ4p5';
+        $SERVER_API_KEY = 'AAAAu7w7RtE:APA91bFykaHLzokBl5ZVSdQzrIPM1tgocz6eV_4_kuaUbF9HfhMh9w8PX-Lpk30-J8QRBcU6BQFyv2vpRbXX2sLdOMczYXf8qkG_irh0rxhDPwdOl1HpozqnaTUTR-TE51T0x2emrke-';
 
         $data = [
             "registration_ids" => $firebaseToken,
@@ -54,6 +54,8 @@ class WebNotificationController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
 
         $response = curl_exec($ch);
+
+        // dd($response);
 
         return redirect()->route('push-notification');
     }

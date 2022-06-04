@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\ToKhai;
 use App\Http\Requests\UserRequest;
+use App\Models\Chat;
 use App\Models\DangKyTiemChung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use LaravelFCM\Message\OptionsBuilder;
+use LaravelFCM\Message\PayloadDataBuilder;
+use LaravelFCM\Message\PayloadNotificationBuilder;
+use LaravelFCM\Facades\FCM;
 
 class UserController extends Controller
 {
@@ -165,5 +170,58 @@ class UserController extends Controller
 
         return redirect()->route('index.tiem-chung')
             ->with('info', __('Xóa thành công!'));
+    }
+
+    public function indexChat ()
+    {
+        $chats = Chat::all();
+
+        return view('chat-firebase', compact('chats'));
+    }
+
+    public function createChat (Request $request)
+    {
+        $input = $request->all();
+        $message = $input['message'];
+
+        $chat = new Chat([
+            'sender_id' => auth()->user()->id,
+            'sender_name' => auth()->user()->name,
+            'receive_id' => 1,
+            'message' => $message
+        ]);
+
+        $this->broadCastMessage(auth()->user()->name, $message);
+
+        $chat->save();
+
+        return redirect()->back();
+    }
+
+    private function broadCastMessage ($sender_name, $message)
+    {
+        // dd(phpinfo());
+        $optionBuilder = new OptionsBuilder();
+        $optionBuilder->setTimeToLive(60*20);
+
+        $notificationBuilder = new PayloadNotificationBuilder('New message from: '.$sender_name);
+        $notificationBuilder->setBody($message)
+                            ->setSound('default')
+                            ->setClickAction('http://pc-covid.com/chat');
+
+        $dataBuilder = new PayloadDataBuilder();
+        $dataBuilder->addData([
+            'sender_name' => $sender_name,
+            'message' => $message
+        ]);
+
+        $option = $optionBuilder->build();
+        $notification = $notificationBuilder->build();
+        $data = $dataBuilder->build();
+
+        $token = User::all()->pluck('device_token')->toArray();
+        $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
+
+        return $downstreamResponse->numberSuccess();
     }
 }

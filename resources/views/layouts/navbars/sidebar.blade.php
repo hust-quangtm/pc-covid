@@ -134,12 +134,14 @@
                                         {{ __('Yêu Cầu Xác Nhận F0') }}
                                     </a>
                                 </li>
-                                @if(auth()->user()->getCheckPatientInforByUserID(auth()->user()->id)[0]->confirm_status == "infected")
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('health-track.index') }}">
-                                            {{ __('Theo Dõi Sức Khỏe') }}
-                                        </a>
-                                    </li>
+                                @if(!auth()->user()->getCheckPatientInforByUserID(auth()->user()->id))
+                                    @if(auth()->user()->getCheckPatientInforByUserID(auth()->user()->id)[0]->confirm_status == "infected")
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('health-track.index') }}">
+                                                {{ __('Theo Dõi Sức Khỏe') }}
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endif
                             </ul>
                         </div>
