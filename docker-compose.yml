@@ -19,7 +19,7 @@ services:
       - my_network
   mariadb:
     image: mariadb:10.6.4
-    container_name: mariadb_pc_covid
+    container_name: mariadb_pc_covid2
     restart: unless-stopped
     tty: true
     ports:
@@ -29,8 +29,8 @@ services:
     environment:
       MYSQL_DATABASE: pc_covid
       MYSQL_USER: root
-      MYSQL_PASSWORD:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
       SERVICE_NAME: mysql
     networks:
       - my_network
