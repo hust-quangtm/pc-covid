@@ -24,7 +24,7 @@
     <div id="app" class="container">
         <div class="messaging">
             <div class="inbox_msg">
-                <div class="inbox_people">
+                <!-- <div class="inbox_people">
                     <div class="headind_srch">
                         <div class="recent_heading">
                             <h4>Recent</h4>
@@ -117,34 +117,31 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="mesgs">
+                </div> -->
+                <div class="mesgs col-12">
                     <div class="msg_history">
-                        @foreach($chats as $key => $chat)
-                            @if(!$chat)
-                                <p>There is no chat yet!</p>
-                            @endif
-                            @if($chat->sender_id === Auth::user()->id)
-                                <div class="outgoing_msg">
-                                    <div class="sent_msg">
-                                        <p>{{$chat->message}}</p>
-                                        <span class="time_date">{{$chat->created_at}}</span>
-                                    </div>
-                                </div>
-                            @else
-                                <div class="incoming_msg">
-                                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png"
-                                            alt="sunil"> </div>
-                                    <div class="received_msg">
-                                        <div class="received_withd_msg">
-                                            <b>{{$chat->sender_name}}</b>
-                                            <p>{{$chat->message}}</p>
-                                            <span class="time_date">{{$chat->created_at}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
+                        {{--@foreach($chats as $key => $chat)--}}
+                            {{--@if($chat->sender_id === Auth::user()->id)--}}
+                                {{--<div class="outgoing_msg">--}}
+                                    {{--<div class="sent_msg">--}}
+                                        {{--<p>{{$chat->message}}</p>--}}
+                                        {{--<span class="time_date">{{$chat->created_at}}</span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--@else--}}
+                                {{--<div class="incoming_msg">--}}
+                                    {{--<div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png"--}}
+                                            {{--alt="sunil"> </div>--}}
+                                    {{--<div class="received_msg">--}}
+                                        {{--<div class="received_withd_msg">--}}
+                                            {{--<b>{{$chat->sender_name}}</b>--}}
+                                            {{--<p>{{$chat->message}}</p>--}}
+                                            {{--<span class="time_date">{{$chat->created_at}}</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                        {{--@endforeach--}}
                     </div>
                     <div class="type_msg mb-3">
                         <div class="input_msg_write">
@@ -177,25 +174,26 @@
                 },
                 created() {
                     this.fetchMessages();
-                    Echo.private('chat')
-                    .listen('MessageSent', (e) => {
-                        this.messages.push({
-                        message: e.message.message,
-                        user: e.user
+                    window.Echo.private('chat')
+                        .listen('MessageSent', (e) => {
+                            console.log(e);
+                            this.messages.push({
+                                message: e.message.message,
+                                user: e.user
+                            });
                         });
-                    });
                 },
                 methods: {
                     fetchMessages() {
                         axios.get('/messages').then(response => {
                             this.messages = response.data;
                         });
-                        console.log(this.messages);
                     },
 
                     sendMessage () {
                         axios.post('/messages', { message: this.message}).then((respone) => {
                             console.log(respone);
+                            this.fetchMessages();
                         });
                         this.message = ""
                     }

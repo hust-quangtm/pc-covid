@@ -11,7 +11,7 @@ class ChatsController extends Controller
 {
     public function indexChat ()
     {
-        $chats = Message::all();
+        $chats = Message::all();    
 
         return view('chat', compact('chats'));
     }
@@ -37,8 +37,10 @@ class ChatsController extends Controller
         $user = Auth::user();
 
         $message = new Message();
-        $message['sender_id'] = 2;
+        $message['sender_id'] = $user->id;
+        $message['sender_name'] = $user->name;
         $message['receive_id'] = 1;
+        $message['chat_room_id'] = $user->id.'_1';
         $message['message'] = $request->message;
 
         $message->save();
