@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
     Route::get('getLocation', 'App\Http\Controllers\ProfileController@getLocation')->name('ajax_get.location');
     Route::post('/store-token', 'App\Http\Controllers\WebNotificationController@storeToken')->name('store.token');
+    Route::get('/mtg','App\Http\Controllers\ZoomController@index');
 
     Route::group(['prefix' => 'khao-bao-y-te'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('index.khai-bao');
