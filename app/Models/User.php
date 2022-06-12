@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return PatientInformation::with('user')->where('user_id', $id)->orderBy('created_at', 'DESC')->get();
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
