@@ -1,27 +1,26 @@
-@extends('layouts.app', ['title' => __('Tư Vấn Trực Tuyến')])
+<html>
 
-@section('content')
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css"
+        rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="/css/chat.css" type="text/css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.0/echo.common.min.js"></script>
+</head>
+
+<body>
+    @extends('layouts.app', ['title' => __('Tư Vấn Trực Tuyến')])
+    @section('content')
     @include('users.partials.header', [
         'title' => __('Xin chào') . ' '. auth()->user()->name,
         'description' => __('Hãy cùng chung tay đẩy lùi Covid'),
         'class' => 'col-lg-12'
     ])
-
-    {{--<div class="app">--}}
-        {{--<header>--}}
-            {{--<h1>Let's Talk!</h1>--}}
-            {{--<input type="text" name="username" id="username" placeholder="Please enter a username...">--}}
-        {{--</header>--}}
-
-        {{--<div id="messages">--}}
-
-        {{--</div>--}}
-
-        {{--<form id="message_form">--}}
-            {{--<input type="text" name="message" id="message_input" placeholder="Write a message...">--}}
-            {{--<button type="submit" id="message_send">Send Message</button>--}}
-        {{--</form>--}}
-    {{--</div>--}}
     <div id="app" class="container">
         <div class="messaging">
             <div class="inbox_msg">
@@ -120,48 +119,90 @@
                     </div>
                 </div> -->
                 <div class="mesgs col-12">
-                    <div class="msg_history messages mb-4">
-                        @foreach($chats as $key => $chat)
+                    <div class="msg_history">
+                        {{--@foreach($chats as $key => $chat)--}}
                             {{--@if($chat->sender_id === Auth::user()->id)--}}
-                            {{--<div class="outgoing_msg" id="outgoing_msg">--}}
-                                {{--<div class="sent_msg">--}}
-                                    {{--<p>{{$chat->message}}</p>--}}
-                                    {{--<span class="time_date">{{$chat->created_at}}</span>--}}
+                                {{--<div class="outgoing_msg">--}}
+                                    {{--<div class="sent_msg">--}}
+                                        {{--<p>{{$chat->message}}</p>--}}
+                                        {{--<span class="time_date">{{$chat->created_at}}</span>--}}
+                                    {{--</div>--}}
                                 {{--</div>--}}
-                            {{--</div>--}}
                             {{--@else--}}
-                            <div class="incoming_msg mt-3" id="incoming_msg">
-                                <div class="old-msg">
-                                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png"
-                                                                        alt="sunil"> </div>
-                                    <div class="received_msg">
-                                        <div class="received_withd_msg">
-                                            <b>{{$chat->sender_name}}</b>
-                                            <p>{{$chat->message}}</p>
+                                {{--<div class="incoming_msg">--}}
+                                    {{--<div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png"--}}
+                                            {{--alt="sunil"> </div>--}}
+                                    {{--<div class="received_msg">--}}
+                                        {{--<div class="received_withd_msg">--}}
+                                            {{--<b>{{$chat->sender_name}}</b>--}}
+                                            {{--<p>{{$chat->message}}</p>--}}
                                             {{--<span class="time_date">{{$chat->created_at}}</span>--}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
                             {{--@endif--}}
-                        @endforeach
-                            <div id="new_msg">
-
-                            </div>
+                        {{--@endforeach--}}
                     </div>
                     <div class="type_msg mb-3">
                         <div class="input_msg_write">
-                            <form id="message_form">
-{{--                                @if (auth()->user()->hasRole('admin'))--}}
-                                    <input type="hidden" id="username" name="username" value="{{ auth()->user()->id }}">
-                                {{--@endif--}}
-                                <input type="text" class="write_msg" id="message_input" placeholder="Type a message" name="message" @keyup.enter="sendMessage"/>
-                                <button class="msg_send_btn" id="message_send" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                            </form>
+                            <!-- <form action="{{ route('chat.post') }}" method="POST">
+                                @csrf
+                                <input type="text" v-model="message" class="write_msg" placeholder="Type a message" name="message" @keyup.enter="sendMessage"/>
+                                <button class="msg_send_btn" type="submit" @click="sendMessage"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            </form> -->
+                            <!-- <form action="{{ route('chat.post') }}" method="POST">
+                                @csrf -->
+                                <input type="text" v-model="message" class="write_msg" placeholder="Type a message" name="message" @keyup.enter="sendMessage"/>
+                                <button class="msg_send_btn" type="submit" @click="sendMessage"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+    @endsection
+    @section('script')
+        <script>
+            new Vue(
+            {
+                el: "#app",
+                data() {
+                    return {
+                        message: "",
+                        messages: []
+                    }
+                },
+                created() {
+                    this.fetchMessages();
+                    Echo.private('chat')
+                        .listen('MessageSent', (e) => {
+                            console.log(e);
+                            this.messages.push({
+                                message: e.message.message,
+                                user: e.user
+                            });
+                        });
+                },
+                methods: {
+                    fetchMessages() {
+                        axios.get('/messages').then(response => {
+                            this.messages = response.data;
+                        });
+                    },
+
+                    sendMessage () {
+                        console.log(1);
+                        axios.post('/messages', { message: this.message}).then((respone) => {
+                            console.log(respone);
+                            this.fetchMessages();
+                        });
+                        this.message = ""
+                    }
+                }
+            })
+        </script>
+    @endsection
+</body>
+
+</html>

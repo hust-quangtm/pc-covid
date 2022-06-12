@@ -21,6 +21,8 @@
         <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
         <link rel="apple-touch-icon" href="{{ asset('logo.PNG') }}">
         <link rel="manifest" href="{{ asset('/manifest.json') }}">
+        <link href="/css/chat.css" type="text/css" rel="stylesheet">
+
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -52,6 +54,7 @@
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
         <script src="{{ asset('/sw.js') }}"></script>
+        <script src="../../js/app.js"></script>
         <script>
             if (!navigator.serviceWorker.controller) {
                 navigator.serviceWorker.register("/sw.js").then(function (reg) {

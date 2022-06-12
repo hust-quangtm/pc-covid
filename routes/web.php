@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Events\MessageSent;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getLocation', 'App\Http\Controllers\ProfileController@getLocation')->name('ajax_get.location');
     Route::post('/store-token', 'App\Http\Controllers\WebNotificationController@storeToken')->name('store.token');
     Route::get('chat', 'App\Http\Controllers\ChatsController@indexChat')->name('chat.index');
-    Route::get('messages', 'App\Http\Controllers\ChatsController@fetchMessages')->name('chat.get');
-    Route::post('messages', 'App\Http\Controllers\ChatsController@sendMessage')->name('chat.post');
+    Route::post('send-message', 'App\Http\Controllers\ChatsController@sendMessage')->name('chat.send');
 
     Route::group(['prefix' => 'khao-bao-y-te'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('index.khai-bao');

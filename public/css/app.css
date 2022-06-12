@@ -1,2 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-
+.card-header {
+  background-image: url(/images/profile-cover.jpg?978992455652990b161dd7ae7462e93b);
+  background-size: cover;
+  background-position: center top;
+}

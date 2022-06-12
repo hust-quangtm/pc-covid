@@ -11,7 +11,7 @@ class ChatsController extends Controller
 {
     public function indexChat ()
     {
-        $chats = Message::all();    
+        $chats = Message::all();
 
         return view('chat', compact('chats'));
     }
@@ -45,8 +45,9 @@ class ChatsController extends Controller
 
         $message->save();
 
+        event(new MessageSent($user->name, $request->message));
 
-        broadcast(new MessageSent($user, $message))->toOthers();
+//        broadcast(new MessageSent($user, $message))->toOthers();
 
         return ['status' => 'Message Sent!'];
     }
