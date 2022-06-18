@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/store-token', 'App\Http\Controllers\WebNotificationController@storeToken')->name('store.token');
     Route::get('chat', 'App\Http\Controllers\ChatsController@indexChat')->name('chat.index');
     Route::post('send-message', 'App\Http\Controllers\ChatsController@sendMessage')->name('chat.send');
+    Route::get('video', 'App\Http\Controllers\VideoCallController@index')->name('video.index');
 
     Route::group(['prefix' => 'khao-bao-y-te'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('index.khai-bao');
