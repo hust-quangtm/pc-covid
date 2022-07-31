@@ -55,6 +55,7 @@
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
         <script src="{{ asset('/sw.js') }}"></script>
         <script src="../../js/app.js"></script>
+        <script src="../../../js/lib.js"></script>
         <script>
             if (!navigator.serviceWorker.controller) {
                 navigator.serviceWorker.register("/sw.js").then(function (reg) {

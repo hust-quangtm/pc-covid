@@ -2085,41 +2085,51 @@ module.exports = {
 // const app = new Vue({
 //     el: '#app',
 // });
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
-var new_msg = document.getElementById("new_msg");
-var message_input = document.getElementById("message_input");
-var message_form = document.getElementById("message_form");
-
-if (message_form != null) {
-  message_form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var has_errors = false;
-
-    if (message_input.value == '') {
-      alert("Please enter a message!");
-      has_errors = true;
-    }
-
-    if (has_errors) {
-      return;
-    }
-
-    var options = {
-      method: 'post',
-      url: '/send-message',
-      data: {
-        message: message_input.value
-      }
-    };
-    axios(options);
-  });
-  window.Echo.channel('chat').listen('.message', function (e) {
-    console.log(e);
-    message_input.value = '';
-    new_msg.innerHTML += '<div class="incoming_msg_img mt-3">' + '<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> ' + '</div>' + '<div class="received_msg">' + '<div class="received_withd_msg">' + '<b>' + e.username + '</b>' + '<p>' + e.message + '</p>' + '</div>' + '</div>';
-  });
-}
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // const new_msg = document.getElementById("new_msg");
+// const message_input = document.getElementById("message_input");
+// const message_form = document.getElementById("message_form");
+// if (message_form != null) {
+//     message_form.addEventListener('submit', function (e) {
+//         e.preventDefault();
+//
+//         let has_errors = false;
+//
+//         if (message_input.value == '') {
+//             alert("Please enter a message!");
+//             has_errors = true;
+//         }
+//
+//         if (has_errors) {
+//             return;
+//         }
+//
+//         const options = {
+//             method: 'post',
+//             url: '/send-message',
+//             data: {
+//                 message: message_input.value
+//             }
+//         }
+//
+//         axios(options);
+//     })
+//
+//     window.Echo.channel('chat')
+//         .listen('.message', (e) => {
+//             console.log(e);
+//             message_input.value = '';
+//             new_msg.innerHTML +=
+//                 '<div class="incoming_msg_img mt-3">' +
+//                 '<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> ' +
+//                 '</div>' +
+//                 '<div class="received_msg">' +
+//                 '<div class="received_withd_msg">' +
+//                 '<b>' + e.username +'</b>' +
+//                 '<p>' + e.message +'</p>' +
+//                 '</div>' +
+//                 '</div>';
+//         })
+// }
 
 /***/ }),
 
