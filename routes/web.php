@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('chat', 'App\Http\Controllers\ChatsController@indexChat')->name('chat.index');
     Route::post('send-message', 'App\Http\Controllers\ChatsController@sendMessage')->name('chat.send');
     Route::get('video', 'App\Http\Controllers\VideoCallController@index')->name('video.index');
+    Route::get('pdf', 'App\Http\Controllers\PDFController@indexPDF')->name('pdf.index');
+//    Route::get('generate-pdf', 'App\Http\Controllers\PDFController@generatePDF')->name('pdf.dowload');
+    Route::get('generate-pdf/{id}/{user_id}', 'App\Http\Controllers\PDFController@generatePDF')->name('pdf.dowload');
 
     Route::group(['prefix' => 'khao-bao-y-te'], function () {
         Route::get('/', 'App\Http\Controllers\UserController@index')->name('index.khai-bao');

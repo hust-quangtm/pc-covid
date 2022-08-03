@@ -28,6 +28,7 @@
                                     <th scope="col" class="sort">Địa Chỉ</th>
                                     <th scope="col" class="sort">Ngày Khai Báo</th>
                                     <th scope="col" class="sort">Xác Nhận Của Cơ Sở Y Tế</th>
+                                    <th scope="col" class="sort">Ngày Hẹn Test Trực Tuyến</th>
                                     <th scope="col" class="sort">Ngày Nhiễm Bệnh</th>
                                     <th scope="col" class="sort">Ngày Khỏi Bệnh</th>
                                     <th scope="col"></th>
@@ -82,6 +83,13 @@
                                                     @if($data->confirm_status == 'not_checked')
                                                         <span class="name mb-0 text-sm">Chờ Duyệt</span>
                                                     @endif
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm {{$data->proof_schedule >= now() ? 'text-danger' : ''}}" data-date-format="yyyy-mm-dd">{{$data->proof_schedule ? date_format(new DateTime($data->proof_schedule), 'Y-m-d') : ''}}</span>
                                                 </div>
                                             </div>
                                         </th>

@@ -178,6 +178,7 @@ return [
         LaravelFrontendPresets\ArgonPreset\ArgonPresetServiceProvider::class,
         //Entrust
         Shanmuga\LaravelEntrust\LaravelEntrustServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -235,6 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //Entrust
         'LaravelEntrust'   => Shanmuga\LaravelEntrust\Facades\LaravelEntrustFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

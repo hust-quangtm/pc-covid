@@ -57,6 +57,17 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="col-12 pl-0">
+                                        <div class="form-group{{ $errors->has('expected_schedule') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-declaration_date">{{ __('Thời gian dự kiến tham gia test dưới sự dám sát của nhân viên y tế:') }}</label>
+                                            <input type="text" name="expected_schedule" data-date-format="yyyy-mm-dd" value="{{ $data->expected_schedule ? date_format(new DateTime($data->expected_schedule), 'Y-m-d') : ''}}" class="form-control form-control-alternative{{ $errors->has('dateOfInjectionRegister') ? ' is-invalid' : '' }} datepicker" required>
+                                            @if ($errors->has('expected_schedule'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('expected_schedule') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-note">{{ __('Ghi chú:') }}</label>
                                         <input type="text" class="form-control" name="note" placeholder="Ghi chú khác của người bệnh">
@@ -84,6 +95,17 @@
                                                         <option value="not_infected" {{$data->confirm_status == 'not_infected' ? 'selected' : ''}}>Âm Tính Với Covid 19</option>
                                                         <option value="cannot_proof" {{$data->confirm_status == 'cannot_proof' ? 'selected' : ''}}>Chưa Đủ Điều Kiện Để Xác Minh</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 pl-0">
+                                                <div class="form-group{{ $errors->has('proof_schedule') ? ' has-danger' : '' }}">
+                                                    <label class="form-control-label" for="input-proof_schedule">{{ __('Thời Gian Hẹn Test Trực Tuyến') }}</label>
+                                                    <input type="text" name="proof_schedule" data-date-format="yyyy-mm-dd" value="{{ $data->proof_schedule ? date_format(new DateTime($data->proof_schedule), 'Y-m-d') : ''}}" class="form-control datepicker">
+                                                    @if ($errors->has('proof_schedule'))
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $errors->first('proof_schedule') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-12 pl-0">

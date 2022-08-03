@@ -28,6 +28,7 @@
                                     <th scope="col" class="sort" data-sort="ID">ID</th>
                                     <th scope="col" class="sort" data-sort="title">Ngày Khai Báo</th>
                                     <th scope="col" class="sort" data-sort="description">Xác Nhận Của Cơ Sở Y Tế</th>
+                                    <th scope="col" class="sort" data-sort="description">Ngày Hẹn Test Trực Tuyến</th>
                                     <th scope="col" class="sort" data-sort="description">Ngày Nhiễm Bệnh</th>
                                     <th scope="col" class="sort" data-sort="started_at">Ngày Khỏi Bệnh</th>
                                     <th scope="col"></th>
@@ -67,6 +68,13 @@
                                         <th scope="row">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
+                                                    <span class="name mb-0 text-sm {{$data->proof_schedule >= now() ? 'text-danger' : ''}}" data-date-format="yyyy-mm-dd">{{$data->proof_schedule ? date_format(new DateTime($data->proof_schedule), 'Y-m-d') : ''}}</span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
                                                     <span class="name mb-0 text-sm" data-date-format="yyyy-mm-dd">{{$data->infected_day ? date_format(new DateTime($data->infected_day), 'Y-m-d') : ''}}</span>
                                                 </div>
                                             </div>
@@ -85,6 +93,9 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                    @if($data->infected_day != null)
+                                                        <a class="dropdown-item" href="{{ route('pdf.dowload', [$data->id, $data->user_id])}}">Chứng Nhận Covid</a>
+                                                    @endif
                                                     <a class="dropdown-item" href="{{ route('check-patient.show', $data->id)}}">Chi tiết</a>
                                                     <a class="dropdown-item" href="{{ route('check-patient.edit', $data->id)}}">Chỉnh sửa</a>
                                                     <a class="dropdown-item period-delete" href="{{ route('check-patient.delete', $data->id) }}">Xóa</a>

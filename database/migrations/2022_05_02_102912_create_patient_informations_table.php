@@ -21,6 +21,8 @@ class CreatePatientInformationsTable extends Migration
             $table->string('confirm_status')->default('not_checked');
             $table->timestamp('infected_day')->nullable();;
             $table->timestamp('recovery_day')->nullable();
+            $table->timestamp('expected_schedule')->nullable();
+            $table->timestamp('proof_schedule')->nullable();
             $table->text('note')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')

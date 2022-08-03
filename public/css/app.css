@@ -4,3 +4,9 @@
   background-size: cover;
   background-position: center top;
 }
+
+.msg {
+  background-image: url(/images/msg.webp?d46478e2b9dfeca3ddebe3d6c6bccf75);
+  background-size: cover;
+  position: fixed;
+}

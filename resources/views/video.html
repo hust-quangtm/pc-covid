@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>PC Coivde MTG</title>
+    <title>PC Coivd MTG</title>
 
     <!-- import the webpage's stylesheet -->
     <link
@@ -15,39 +15,46 @@
 
     <!-- import the webpage's javascript file -->
 
+    <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
     <script src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js"></script>
+    <link href="/css/chat.css" type="text/css" rel="stylesheet">
+
 </head>
-<body>
-    <div class="container has-text-centered" v-cloak id="app">
-        <div>
-            <button class="button is-primary" v-if="!room" @click="createRoom">
-                Tạo Meeting
-            </button>
-
-            <button class="button is-info" v-if="!room" @click="joinWithId">
-                Join Meeting
-            </button>
-
-            <button class="button is-info" v-if="room" @click="publish(true)">
-                Share Desktop
-            </button>
+<body class="mtg">   
+    <section class="base">
+        <div class="container has-text-centered" v-cloak id="app">
+            <div>
+                <button class="button is-primary" v-if="!room" @click="createRoom">
+                    Tạo Cuộc Họp Mới
+                </button>
+    
+                <button class="button is-info" v-if="!room" @click="joinWithId">
+                    Tham Gia Cuộc Họp
+                </button>
+    
+                <button class="button is-info" v-if="room" @click="publish(true)">
+                    Chia Sẻ Màn Hình
+                </button>
+            </div>
+    
+            <div v-if="roomId" class="info">
+                <p>Bạn đang ở trong phòng <strong>{{roomId}}</strong>.</p>
+                <!-- <p>
+                    Link join:
+                    <a v-bind:href="roomUrl" target="_blank">{{roomUrl}}</a>.
+                </p> -->
+                <p>Chia sẻ mã cuộc họp<code>{{roomId}}</code></p>
+            </div>
         </div>
+    </section>
 
-        <div v-if="roomId" class="info">
-            <p>Bạn đang ở trong room <strong>{{roomId}}</strong>.</p>
-            <p>
-                Link join:
-                <a v-bind:href="roomUrl" target="_blank">{{roomUrl}}</a>.
-            </p>
-            <p>Hoặc bạn cũng có thể copy <code>{{roomId}}</code> để share.</p>
+    <section class="video">
+        <div class="container">
+            <div id="videos"></div>
         </div>
-    </div>
-
-    <div class="container">
-        <div id="videos"></div>
-    </div>
+    </section>
 </body>
 <script>
     const PROJECT_ID = "SKOxSKXgQuz8aphfefhlKn88BRGcmE17KF";

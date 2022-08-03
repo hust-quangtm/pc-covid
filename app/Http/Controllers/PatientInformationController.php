@@ -47,6 +47,7 @@ class PatientInformationController extends Controller
         $data = new PatientInformation();
         $data['user_id'] = Auth()->id();
         $data['declaration_date'] = $request->declaration_date;
+        $data['expected_schedule'] = $request->expected_schedule;
 
         if ($request->file('proof_of_image')) {
             $file= $request->file('proof_of_image');
@@ -103,6 +104,8 @@ class PatientInformationController extends Controller
         $data = PatientInformation::getInforById($id);
 
         $data['declaration_date'] = $request->declaration_date;
+        $data['expected_schedule'] = $request->expected_schedule;
+        $data['proof_schedule'] = $request->proof_schedule;
         $data['confirm_status'] = $request->confirm_status;
         $data['infected_day'] = $request->infected_day;
         $data['recovery_day'] = $request->recovery_day;

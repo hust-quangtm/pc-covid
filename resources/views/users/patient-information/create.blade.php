@@ -54,6 +54,17 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="col-12 pl-0">
+                                        <div class="form-group{{ $errors->has('declaration_date') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-declaration_date">{{ __('Thời gian dự kiến tham gia test dưới sự dám sát của nhân viên y tế:') }}</label>
+                                            <input type="text" name="expected_schedule" data-date-format="yyyy-mm-dd" class="form-control form-control-alternative{{ $errors->has('expected_schedule') ? ' is-invalid' : '' }} datepicker" required>
+                                            @if ($errors->has('expected_schedule'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('expected_schedule') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-note">{{ __('Ghi chú:') }}</label>
                                         <input type="text" class="form-control" name="note" placeholder="Ghi chú khác của người bệnh">
@@ -65,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <a class="btn btn-success mt-4" href="{{ route('check-patient.index') }}">{{ __('Trở Lại') }}</a>
+                                    <a class="btn btn-info mt-4" href="{{ route('check-patient.index') }}">{{ __('Trở Lại') }}</a>
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Lưu') }}</button>
                                 </div>
                             </div>

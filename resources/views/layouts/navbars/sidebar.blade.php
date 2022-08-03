@@ -59,13 +59,23 @@
                 <li class="nav-item">
                     @if(auth()->user()->hasRole('admin'))
                         <a class="nav-link" href="{{ route('admin.index') }}">
-                            <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                            <i class="ni ni-tv-2 text-primary"></i> {{ __('Trang Chủ') }}
                         </a>
                     @else
                         <a class="nav-link" href="{{ route('home') }}">
-                            <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                            <i class="ni ni-tv-2 text-primary"></i> {{ __('Trang Chủ') }}
                         </a>
                     @endif
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('chat.index') }}">
+                    <i class="ni ni-chat-round" style="color: #5fcaf4;"></i> {{ __('Tư Vấn Trực Tuyến') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('video.index') }}">
+                    <i class="ni ni-tv-2" style="color: #5fcaf4;"></i> {{ __('Cuộc Họp Trực Tuyến') }}
+                    </a>
                 </li>
                 @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('ward') || auth()->user()->hasRole('district') || auth()->user()->hasRole('province'))
                     <li class="nav-item">
@@ -134,12 +144,14 @@
                                         {{ __('Yêu Cầu Xác Nhận F0') }}
                                     </a>
                                 </li>
-                                @if(auth()->user()->getCheckPatientInforByUserID(auth()->user()->id)[0]->confirm_status == "infected")
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('health-track.index') }}">
-                                            {{ __('Theo Dõi Sức Khỏe') }}
-                                        </a>
-                                    </li>
+                                @if(!auth()->user()->getCheckPatientInforByUserID(auth()->user()->id)->isEmpty())
+                                    @if(auth()->user()->getCheckPatientInforByUserID(auth()->user()->id)[0]->confirm_status == "infected")
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('health-track.index') }}">
+                                                {{ __('Theo Dõi Sức Khỏe') }}
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endif
                             </ul>
                         </div>

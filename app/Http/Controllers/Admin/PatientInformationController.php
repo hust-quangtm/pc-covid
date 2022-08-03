@@ -76,6 +76,8 @@ class PatientInformationController extends Controller
     {
         $data = PatientInformation::getInforById($id);
 
+        $data['expected_schedule'] = $request->expected_schedule;
+        $data['proof_schedule'] = $request->proof_schedule;
         $data['declaration_date'] = $request->declaration_date;
         $data['confirm_status'] = $request->confirm_status;
         $data['infected_day'] = $request->infected_day;
